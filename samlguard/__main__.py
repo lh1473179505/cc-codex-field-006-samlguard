@@ -57,6 +57,9 @@ def main(argv: list[str] | None = None) -> int:
     except FileNotFoundError as e:
         print(f"error: file not found: {e.filename or e}", file=sys.stderr)
         return 2
+    except OSError as e:
+        print(f"error: cannot write result: {e}", file=sys.stderr)
+        return 2
     except NotImplementedVerify as e:
         print(f"error: {e}", file=sys.stderr)
         return 2

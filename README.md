@@ -5,9 +5,13 @@ A small SAML 2.0 service-provider helper. This snapshot already has:
 - A DTD-refusing XML loader
 - Exclusive C14N and enveloped RSA-SHA256 sign/verify (`samlguard.crypto`)
 - `python -m samlguard inspect` for a structural dump of a Response
+- `python -m samlguard verify` implementing the processing rules in `docs/processing.md`
 - Checked-in test certificates and a set of Responses (valid, expired, wrapped, and so on)
 
-The SAML processing model itself is **not** implemented. `python -m samlguard verify` is the stub you are expected to fill in, following `docs/processing.md`.
+`verify` writes a JSON result to `--out`: `ok`, `subject`, `issuer`,
+`session_index`, `attributes`, `assertion_id`, and an `errors` list of
+`{"code", "message"}`. Only data covered by a valid enveloped signature on the
+used Assertion (or on the enclosing Response) is ever trusted.
 
 ## Requirements
 
